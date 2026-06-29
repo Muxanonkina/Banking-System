@@ -1,8 +1,10 @@
 public class SavingsAccount  implements Transactable  {
 
-    public double debt;
+    private double balance;
 
-
+public SavingsAccount(double balance){
+    this.balance = balance;
+}
 
 
     @Override
@@ -12,27 +14,29 @@ public class SavingsAccount  implements Transactable  {
             return;
         }
 
-        if (debt <= 0) {
-            System.out.println("You have no debt.");
-            return;
-        }
+        balance += amount;
 
-        if (amount > debt) {
-            amount = debt;
-        }
 
-        debt -= amount;
-
-        System.out.println("Payment: " + amount);
-        System.out.println("Remaining debt: " + debt);
+        System.out.println("Deposited: $" + amount);
+        System.out.println("Current balance: " + balance);
     }
 
 @Override
     public void withdraw(double amount){
-        System.out.println("Saving account");
+        if (amount <=0){
+            System.out.println("Amount must be positive");
+        return;
+        }
+        if (amount > balance){
+            System.out.println("Insufficient funds. Balance: $" + balance);
+        return;
+        }
+        balance -= amount;
 }
 @Override
-    public void showBalance(){}
+    public void showBalance(){
+    System.out.println("Current balance: $" + balance);
+}
 
 
 }
