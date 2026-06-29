@@ -1,66 +1,46 @@
-public class BusinessStorage   {
+import java.util.ArrayList;
 
-     String[] businesses ={"IT Company","Restaurant Business","Clothing Store","Constructor Company","Transport Company","Pharmacy Business", "Fitness Center","Agriculture Business","Online Shop"};
+public class BusinessStorage {
 
-    void addBusiness(String newBusiness){
-       for (int i = 0; i < businesses.length; i++){
-           if (businesses[i] == null){
-               businesses[i] = newBusiness;
-               break;
-           }
-       }
+    private ArrayList<String> businesses = new ArrayList<>();
+
+    public BusinessStorage() {
+        businesses.add("IT Company");
+        businesses.add("Restaurant Business");
+        businesses.add("Clothing Store");
+        businesses.add("Construction Company");
+        businesses.add("Transport Company");
+        businesses.add("Pharmacy Business");
+        businesses.add("Fitness Center");
+        businesses.add("Agriculture Business");
+        businesses.add("Online Shop");
     }
 
-    void showAllBusiness(){
-        for (int i = 0; i < businesses.length; i++){
-            if(businesses[i] != null){
-                System.out.println(businesses[i]);
-            }
+    void addBusiness(String newBusiness) {
+        businesses.add(newBusiness);
+        System.out.println("Business added.");
+    }
+
+    void showAllBusiness() {
+        for (String business : businesses) {
+            System.out.println(business);
         }
     }
-void findBusiness(int number){
-        switch (number){
-            case 0:
-                System.out.println(businesses[0]);
-        break;
-            case 1:
-                System.out.println(businesses[1]);
-                break;
-            case 2:
-                System.out.println(businesses[2]);
-                break;
-            case 3:
-                System.out.println(businesses[3]);
-                break;
-                case 4:
-                    System.out.println(businesses[4]);
-            case 5:
-                System.out.println(businesses[5]);
-            break;
-                case 6:
-                    System.out.println(businesses[6]);
-                    break;
-            case 7:
-                System.out.println(businesses[7]);
-                break;
-            case 8:
-                System.out.println(businesses[8]);
-              break;
-            case 9:
-                System.out.println(businesses[9]);
-                break;
-            default:
-                System.out.println("Business not found");
-        }
-}
 
-void removeBusiness(int removeIndex ){
-        if(removeIndex >= 0 && removeIndex < businesses.length){
-            businesses[removeIndex] = null;
-            System.out.println("Bussiness removed");
-        } else{
-            System.out.println("Wrong index");
+    void findBusiness(int number) {
+        if (number >= 0 && number < businesses.size()) {
+            System.out.println("Search result: " + businesses.get(number));
+        } else {
+            System.out.println("Business not found.");
         }
-}
-  
+    }
+
+    void removeBusiness(int removeIndex) {
+        if (removeIndex >= 0 && removeIndex < businesses.size()) {
+            businesses.remove(removeIndex);
+            System.out.println("Business removed.");
+        } else {
+            System.out.println("Wrong index.");
+        }
+    }
 }
