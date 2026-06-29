@@ -6,6 +6,7 @@ public enum CreditPlane {
     private final double creditLimit;
     private final double interestRate;
 
+
     CreditPlane(double creditLimit, double interestRate){
         this.creditLimit = creditLimit;
         this.interestRate = interestRate;

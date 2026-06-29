@@ -1,4 +1,4 @@
-public abstract class Account implements FinancialOperation {
+public abstract class Account  {
 private String name;
 private String sureName;
 private String tel;

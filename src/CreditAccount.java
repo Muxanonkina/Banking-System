@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class CreditAccount extends Account implements Transactable {
 private double debt;
 private CreditPlane currentPlan;
-
+private double creditLimit;
 
 CreditAccount(String name,String sureName,String tel,String gmail,double debt){
     super(name,sureName,tel,gmail);
@@ -14,7 +14,6 @@ void chooseCreditPlan(CreditPlane plan){
 
          if (plan != null) {
             this.currentPlan = plan;
-            this.debt += plan.getCreditLimit();
 
             System.out.println("Credit plan activated: " + plan.name());
             System.out.println("Added to debt: $" + plan.getCreditLimit());
@@ -25,10 +24,26 @@ void chooseCreditPlan(CreditPlane plan){
     }
 
 void takeCredit(double debtSum){
-    debt += debtSum;
+ if (currentPlan == null){
+     System.out.println("Choose credit plan first");
+     return;
+ }
+ if (debtSum <=0){
+     System.out.println("Credit amount must be greater than 0.");
+     System.out.println("Credit approved: $" + debtSum);
+     System.out.println("Current debt: $" + debt);
+ } else {
+     System.out.println("Credit limit exceeded!");
+ }
+
+    if (debt + debtSum <= currentPlan.getCreditLimit()){
+        debt += debtSum;
+        System.out.println("Your credit plan increased to: " + debtSum);
+    }
 }
 
 void payCredit(double paySum){
+
     if (paySum <= debt){
         debt -= paySum;
         System.out.println("Payment successful");
@@ -57,28 +72,45 @@ void payCredit(double paySum){
     public void deposit(double amount){
     if(amount <= 0){
         System.out.println("Error message, exit");
+        return;
     }
     if (debt == 0){
         System.out.println("No debt to pay");
+        return;
     }
     if (amount > debt){
         amount = debt;
+
     }
     debt -= amount;
     System.out.println("Your debt: " + debt);
+
 }
 
 @Override
     public void withdraw(double amount){
 if (amount <= 0){
-
+System.out.println("Write current number");
+}
+if (currentPlan == null){
+    System.out.println("Current plan should be bigger than null");
+}
+    if (debt + amount > creditLimit) {
+        System.out.println("Credit limit exceeded. Available: $" + (creditLimit - debt));
+        return;
+    }
+    debt += amount;
+    System.out.println("Withdrawn: $" + amount + ". Current debt: $" + debt);
 }
 
-}
 
-@Override
-    public void showBalance(){
-    System.out.println("your balance = 0$");
+    @Override
+    public void showBalance() {
+        System.out.println("Debt: $" + debt);
+        System.out.println("Credit limit: $" + creditLimit);
+        System.out.println("Available: $" + (creditLimit - debt));
+    }
+
 }
 
 
