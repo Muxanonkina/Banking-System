@@ -1,4 +1,4 @@
-public class SavingsAccount  implements Transactable  {
+public class SavingsAccount  extends Account implements Transactable  {
 
     private double balance;
 
@@ -38,5 +38,8 @@ public SavingsAccount(double balance){
     System.out.println("Current balance: $" + balance);
 }
 
-
+@Override
+    public void showAccountType(){
+    System.out.println("Savings Account");
+}
 }

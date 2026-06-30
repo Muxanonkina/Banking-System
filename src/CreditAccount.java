@@ -5,7 +5,7 @@ private double debt;
 private CreditPlane currentPlan;
 private double creditLimit;
 
-CreditAccount(String name,String sureName,String tel,String gmail,double debt){
+public CreditAccount(String name,String sureName,String tel,String gmail,double debt){
     super(name,sureName,tel,gmail);
     this.debt = debt;
 }
@@ -14,7 +14,7 @@ void chooseCreditPlan(CreditPlane plan){
 
          if (plan != null) {
             this.currentPlan = plan;
-
+            this.creditLimit = plan.getCreditLimit();
             System.out.println("Credit plan activated: " + plan.name());
             System.out.println("Added to debt: $" + plan.getCreditLimit());
             System.out.println("Your interest rate: " + (plan.getInterestRate() * 100) + "%");
@@ -91,9 +91,11 @@ void payCredit(double paySum){
     public void withdraw(double amount){
 if (amount <= 0){
 System.out.println("Write current number");
+return;
 }
 if (currentPlan == null){
     System.out.println("Current plan should be bigger than null");
+    return;
 }
     if (debt + amount > creditLimit) {
         System.out.println("Credit limit exceeded. Available: $" + (creditLimit - debt));
