@@ -1,7 +1,12 @@
+package modules;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class BusinessAccount extends Account implements LimitManagable,BussinessTransactable {
+import interfaces.LimitManagable;
+import interfaces.BussinessTransactable;
+
+public class BusinessAccount extends Account implements LimitManagable, BussinessTransactable {
 
     private final Map<String, Double> businessMap = new HashMap<>();
     private final Map<String, Double> limitsMap = new HashMap<>();
@@ -22,7 +27,7 @@ public class BusinessAccount extends Account implements LimitManagable,Bussiness
 
     @Override
     public void showAccountType() {
-        System.out.println("Account: Business");
+        System.out.println("Module.Account: Business");
     }
 
 

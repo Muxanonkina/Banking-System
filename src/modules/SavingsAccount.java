@@ -1,4 +1,8 @@
-public class SavingsAccount  extends Account implements Transactable  {
+package modules;
+
+import interfaces.Transactable;
+
+public class SavingsAccount  extends Account implements Transactable {
 
     private double balance;
 
@@ -40,6 +44,6 @@ public SavingsAccount(double balance){
 
 @Override
     public void showAccountType(){
-    System.out.println("Savings Account");
+    System.out.println("Savings Module.Account");
 }
 }

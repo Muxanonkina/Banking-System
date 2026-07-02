@@ -1,3 +1,5 @@
+package interfaces;
+
 public interface Transactable {
 
  void deposit(double amount);

@@ -1,3 +1,5 @@
+package enums;
+
 public enum CreditPlane {
     START(1000.0,0.20),
     STANDART(10000.0,0.15),
