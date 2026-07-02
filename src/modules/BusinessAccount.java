@@ -1,7 +1,12 @@
+package modules;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class BusinessAccount extends Account implements BussinessTransactable {
+import interfaces.LimitManagable;
+import interfaces.BussinessTransactable;
+
+public class BusinessAccount extends Account implements LimitManagable, BussinessTransactable {
 
     private final Map<String, Double> businessMap = new HashMap<>();
     private final Map<String, Double> limitsMap = new HashMap<>();
@@ -22,10 +27,30 @@ public class BusinessAccount extends Account implements BussinessTransactable {
 
     @Override
     public void showAccountType() {
-        System.out.println("Account: Business");
+        System.out.println("Module.Account: Business");
     }
 
+
+
     @Override
+    public void setTransactionLimit(String company, double limit) {
+        if (!limitsMap.containsKey(company)) {
+            System.out.println("Company not found");
+            return;
+        }
+        if (limit <= 0) {
+            System.out.println("Limit must be positive");
+            return;
+        }
+        if (limit < businessMap.get(company)) {
+            System.out.println("New limit is below current balance");
+            return;
+        }
+        limitsMap.put(company, limit);
+        System.out.println("New limit for " + company + ": $" + limit);
+    }
+
+        @Override
     public void deposit(String companyName, double amount) {
         if (amount <= 0) {
             System.out.println("Amount must be positive!");
@@ -98,7 +123,6 @@ public class BusinessAccount extends Account implements BussinessTransactable {
         businessMap.put(to, businessMap.get(to) + amount);
         System.out.println("Transferred " + amount + " from " + from + " to " + to);
     }
-
 
 
     

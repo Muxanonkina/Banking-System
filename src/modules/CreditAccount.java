@@ -1,20 +1,24 @@
-import java.util.Scanner;
+package modules;
 
-public class CreditAccount extends Account implements Transactable {
-private double debt;
-private CreditPlane currentPlan;
-private double creditLimit;
+import interfaces.Transactable;
+import enums.CreditPlane;
 
-CreditAccount(String name,String sureName,String tel,String gmail,double debt){
+public class CreditAccount extends  Account implements Transactable {
+
+    private double debt;
+    private CreditPlane currentPlan;
+    private double creditLimit;
+
+public CreditAccount(String name,String sureName,String tel,String gmail,double debt){
     super(name,sureName,tel,gmail);
     this.debt = debt;
 }
 
-void chooseCreditPlan(CreditPlane plan){
+public void chooseCreditPlan(CreditPlane plan){
 
          if (plan != null) {
             this.currentPlan = plan;
-
+            this.creditLimit = plan.getCreditLimit();
             System.out.println("Credit plan activated: " + plan.name());
             System.out.println("Added to debt: $" + plan.getCreditLimit());
             System.out.println("Your interest rate: " + (plan.getInterestRate() * 100) + "%");
@@ -23,10 +27,9 @@ void chooseCreditPlan(CreditPlane plan){
         }
     }
 
-void takeCredit(double debtSum){
+public void takeCredit(double debtSum){
  if (currentPlan == null){
      System.out.println("Choose credit plan first");
-     return;
  }
  if (debtSum <=0){
      System.out.println("Credit amount must be greater than 0.");
@@ -42,7 +45,7 @@ void takeCredit(double debtSum){
     }
 }
 
-void payCredit(double paySum){
+public void payCredit(double paySum){
 
     if (paySum <= debt){
         debt -= paySum;
@@ -65,7 +68,7 @@ void payCredit(double paySum){
 
 @Override
     public void showAccountType(){
-    System.out.println("Credit Account");
+    System.out.println("Credit Module.Account");
 }
 
 @Override
@@ -91,9 +94,11 @@ void payCredit(double paySum){
     public void withdraw(double amount){
 if (amount <= 0){
 System.out.println("Write current number");
+return;
 }
 if (currentPlan == null){
     System.out.println("Current plan should be bigger than null");
+    return;
 }
     if (debt + amount > creditLimit) {
         System.out.println("Credit limit exceeded. Available: $" + (creditLimit - debt));

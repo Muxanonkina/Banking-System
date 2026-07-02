@@ -1,3 +1,5 @@
+package interfaces;
+
 public interface BussinessTransactable {
     void deposit(String company,double amount);
     void withdraw(String company,double amount);
